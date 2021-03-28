@@ -3,3 +3,4 @@ aws-xray-sdk==2.4.3
 pillow>=8.0.0
 newspaper3k
 boto3
+nltk

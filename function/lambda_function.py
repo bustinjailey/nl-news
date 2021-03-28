@@ -5,6 +5,8 @@ import boto3
 #from aws_xray_sdk.core import xray_recorder
 #from aws_xray_sdk.core import patch_all
 import jsonpickle
+import nltk
+nltk.download('punkt')
 
 #logger = logging.getLogger()
 #logger.setLevel(logging.INFO)
@@ -22,7 +24,6 @@ def main():
 
     N_ARTICLES_TO_ANALYZE = 5
     for paper in newspapers:
-
         if paper.size() == 0:
             continue
 
@@ -32,8 +33,12 @@ def main():
             article.download()
             article.parse()
             article.nlp()
-            print(article.keywords)
             i += 1
+
+    for paper in newspapers:
+        print(paper.brand)
+        for article in paper.articles:
+            print('\t' + str(article.keywords))
 
 def lambda_handler(event, context):
     main()
